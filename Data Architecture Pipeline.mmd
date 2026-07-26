@@ -1,1 +1,93 @@
 
+# Data Architecture Pipeline: From Source Systems to End Users
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                           SOURCE SYSTEMS (The Fish Farms)                           │
+├─────────────────────────────────────────────────────────────────────────────────────┤
+│  Underwater    │  Feed Barge    │  Veterinary    │  ERP (Finance/  │  Weather &    │
+│  Cameras (MP4) │  Controllers   │  Health Logs   │   HR/Inventory) │  Ocean Current │
+│  (Feeding vid) │  (JSON - Feed  │  (CSV - Sea    │   (SQL -        │   Data (API -  │
+│                │   amounts,     │   Lice counts, │   Staff costs,  │   Temp,       │
+│                │   pellet type) │   Vaccinations)│   Feed orders)  │   Salinity)   │
+└───────┬────────┴───────┬────────┴───────┬────────┴────────┬───────┴────────┬───────┘
+        │                │                │                 │                │
+        └────────────────┴────────────────┴─────────────────┴────────────────┘
+                                        │
+                                        ▼
+                        ┌───────────────────────────────────┐
+                        │         RAW DATA LAKE             │  <-- PROVIDER: AWS S3 / Azure ADLS / Google Cloud Storage
+                        │  (Schema-on-Read - Cheap Storage) │
+                        ├───────────────────────────────────┤
+                        │  • Raw MP4 feeds (unprocessed)    │
+                        │  • Raw JSON from feed barges      │
+                        │  • Raw CSV health logs            │
+                        │  • Raw PDF veterinary reports     │
+                        │  • Raw weather API dumps          │
+                        └───────────────────┬───────────────┘
+                                            │
+                                            │ (ELT Process - Spark jobs run here to clean & structure)
+                                            ▼
+                        ┌───────────────────────────────────┐
+                        │        STAGING AREA               │  <-- PROVIDER: Databricks / Azure Synapse Pipelines / AWS Glue
+                        │  (Temporary Clean Room)           │
+                        ├───────────────────────────────────┤
+                        │  • Validate data types            │
+                        │  • Remove duplicates (e.g., same  │
+                        │    sensor reading logged twice)   │
+                        │  • Handle NULLs (e.g., missing    │
+                        │    oxygen readings)               │
+                        │  • Convert video metadata into    │
+                        │    structured "feeding_intensity" │
+                        │    scores via AI inference        │
+                        └───────────────────┬───────────────┘
+                                            │
+                                            │ (ETL - Transform & Load into structured models)
+                                            ▼
+                        ┌───────────────────────────────────────────────────────┐
+                        │        CENTRAL DATA WAREHOUSE (Enterprise)           │  <-- PROVIDER: Snowflake / Amazon Redshift / Google BigQuery
+                        │  (Schema-on-Write - Star/Snowflake Schemas)          │
+                        ├───────────────────────────────────────────────────────┤
+                        │  FACT TABLES:                 DIMENSION TABLES:      │
+                        │  • Fact_Daily_Growth         • Dim_Farm_Sites        │
+                        │    (avg weight, FCR,         • Dim_Feed_Suppliers    │
+                        │     temp, salinity)          • Dim_Date              │
+                        │  • Fact_Health_Events        • Dim_Staff             │
+                        │    (lice outbreaks,          • Dim_Water_Quality     │
+                        │     vaccinations)              Thresholds            │
+                        │  • Fact_Feed_Consumption                              │
+                        └───────────────┬───────────────┬──────────────┬───────┘
+                                        │               │              │
+              ┌─────────────────────────┘               │              └─────────────────────────┐
+              │                                         │                                        │
+              ▼                                         ▼                                        ▼
+┌─────────────────────────────┐  ┌─────────────────────────────────┐  ┌─────────────────────────────┐
+│   DATA MART 1: Harvest &    │  │   DATA MART 2: Feed & Nutrition │  │   DATA MART 3: Veterinary    │
+│   Logistics (Tactical)      │  │   (Tactical)                    │  │   & Health (Tactical)        │
+├─────────────────────────────┤  ├─────────────────────────────────┤  ├─────────────────────────────┤
+│  • Only biomass by pen      │  │  • Only Feed Conversion Ratio   │  │  • Only lice counts per pen  │
+│  • Harvest schedules        │  │  • Pellet type usage            │  │  • Vaccination schedules     │
+│  • Truck/barge locations    │  │  • Water temp correlation       │  │  • Mortality rates           │
+│  • Processing plant slots   │  │  • Daily feed recommendations   │  │  • Antibiotic usage          │
+└───────────────┬─────────────┘  └───────────────┬─────────────────┘  └───────────────┬─────────────┘
+                │                                  │                                    │
+                ▼                                  ▼                                    ▼
+┌─────────────────────────────┐  ┌─────────────────────────────────┐  ┌─────────────────────────────┐
+│  END USERS: Operations      │  │  END USERS: Nutritionists &     │  │  END USERS: Fish Health      │
+│  Managers & Logistics       │  │  Feed Procurement               │  │  Veterinarians & Biologists  │
+├─────────────────────────────┤  ├─────────────────────────────────┤  ├─────────────────────────────┤
+│  • Query: "Which pens       │  │  • Query: "What is the optimal  │  │  • Query: "Show me all pens  │
+│    within 30 km of plant    │  │    pellet size for 4kg salmon   │  │    with lice > 0.5 per fish  │
+│    are at 5.5 kg today?"    │  │    at 12°C to minimize FCR?"    │  │    so I can deploy cleaner   │
+│  • Tool: Power BI / Tableau │  │  • Tool: Custom Jupyter         │  │    fish this week?"          │
+│    Dashboard (Live map)     │  │    Notebooks / Python scripts   │  │  • Tool: Veterinary EMR      │
+└─────────────────────────────┘  └─────────────────────────────────┘  └─────────────────────────────┘
+
+                ┌─────────────────────────────────────────────────────────────────────┐
+                │   END USER - C-Suite Executives (Strategic)                         │
+                │   • Query on the CENTRAL WAREHOUSE (not marts):                     │
+                │     "What is our global EBITDA per kilo across all 50 farms         │
+                │      over the last 5 years, broken down by region?"                 │
+                │   • Tool: Executive Dashboard (Looker / ThoughtSpot)                │
+                └─────────────────────────────────────────────────────────────────────┘
+```
