@@ -81,3 +81,52 @@ The warehouse processes this in seconds, helping the CEO decide whether to inves
 ### Major Providers
 
  **Snowflake**: Huge in aquaculture for its easy data sharing with third-party weather forecasters, **Amazon Redshift**, **Google BigQuery**, **Microsoft Azure Synapse**
+
+---
+## Data Mart
+
+---
+
+### Concept
+
+A data mart is a small, subject-specific slice of the warehouse, customized for a single department. It contains only the data that the team cares about, making their daily queries lightning-fast and simple.
+
+---
+
+### Processing
+
+Built from the central warehouse (or directly from source systems).
+
+---
+
+### Scope
+
+Departmental or team-specific (tactical, day-to-day).
+
+---
+
+### Aquaculture Example
+
+The Harvest & Logistics Team does not care about vaccine history or breeding genetics. They pull a subset from the main warehouse to create their own **Harvest Data Mart**. This mart contains just three tables:
+
+- **Scheduled_Harvest_Dates**
+- **Current_Biomass_per_Pen**
+- **Truck_Fleet_Locations**
+
+The Logistics Manager queries this mart 20 times a day:
+
+> *"Show me all pens within 50 km of the processing plant that are at exactly 5.5 kg average weight, so I can schedule tomorrow's harvest barges."*
+
+Because the mart ignores 90% of the enterprise data, this query runs instantly on a simple BI dashboard (like Power BI or Tableau), preventing costly overgrowth (fish getting too big for the processing machinery).
+
+---
+
+### Major Providers
+
+Data marts are not sold separately — they are built inside the major platforms.
+
+| Approach | Platform |
+|----------|----------|
+| Create a "Virtual Warehouse" | Snowflake (dedicated to Logistics) |
+| Create a curated Schema | Databricks Unity Catalog |
+| Materialize specific aggregated tables | dbt (data build tool) |
