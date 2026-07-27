@@ -81,3 +81,31 @@ Imagine a 3D cube (we can add more dimensions, but humans visualize 3):
 ### Modern Reality
 
 Physical cubes (Microsoft Analysis Services, Oracle Essbase) are less common today. Modern warehouses like Snowflake and BigQuery use adaptive query engines that build temporary aggregates on the fly, effectively acting as "virtual cubes."
+
+---
+
+## Materialized Views (The "Pre-Baked Query")
+
+A materialized view (MV) is a database object that stores the physical result of a query on disk. Unlike a regular "virtual" view (which is just a saved SELECT statement that runs every time we call it), a materialized view is pre-computed and stored like a physical table. It is automatically refreshed (incrementally or fully) when the underlying data changes.
+
+Think of it as: A regular view is a recipe; a materialized view is the actual pre-cooked meal sitting in the fridge, ready to microwave.
+
+---
+
+### Aquaculture Example
+
+The Feed Nutrition team constantly runs this heavy, complex query:
+
+```sql
+SELECT 
+    f.Farm_Region,
+    f.Feed_Type,
+    DATE_TRUNC('month', date) as Month,
+    AVG(fish.Daily_Growth) as Avg_Growth_Rate,
+    SUM(feed.Total_Kg) / SUM(fish.Biomass) as FCR
+FROM 
+    Fact_Daily_Growth fish
+    JOIN Dim_Feed_Usage feed ON fish.Pen_ID = feed.Pen_ID
+    JOIN Dim_Farm f ON fish.Farm_ID = f.Farm_ID
+WHERE fish.Date > '2023-01-01'
+GROUP BY 1, 2, 3;
