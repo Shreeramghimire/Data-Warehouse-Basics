@@ -27,3 +27,15 @@ How we physically build and populate our warehouse defines its architecture. The
 
 ---
 
+## C. Data Vault
+
+**Concept:** A hybrid approach that separates data into three types: **Hubs** (core business keys, like Farm_ID), **Links** (relationships between hubs, like which feed is used at which farm), and **Satellites** (historical attributes, like changing water temperatures over time). It is designed for extreme scalability and full historical tracking.
+
+**Aquaculture Example:** If a salmon farm changes its name or ownership, a Data Vault tracks every single change historically without overwriting old records. This is critical for regulatory compliance (traceability from egg to plate).
+
+**Pros:** Handles change effortlessly, perfect for auditing, highly scalable.
+
+**Cons:** Complex to query for business users; requires a separate "information mart" layer on top for reporting.
+
+---
+
