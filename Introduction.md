@@ -115,7 +115,7 @@ The Harvest & Logistics Team does not care about vaccine history or breeding gen
 
 The Logistics Manager queries this mart 20 times a day:
 
-> *"Show me all pens within 50 km of the processing plant that are at exactly 5.5 kg average weight, so I can schedule tomorrow's harvest barges."*
+> *"Show me all pens within 50 km of the processing plant that are at exactly 5.5 kg average weight so I can schedule tomorrow's harvest barges."*
 
 Because the mart ignores 90% of the enterprise data, this query runs instantly on a simple BI dashboard (like Power BI or Tableau), preventing costly overgrowth (fish getting too big for the processing machinery).
 
