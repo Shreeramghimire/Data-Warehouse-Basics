@@ -39,3 +39,10 @@ How we physically build and populate our warehouse defines its architecture. The
 
 ---
 
+## D. Modern Cloud-Native
+
+**Concept:** Used by Snowflake, Databricks, and BigQuery. Storage (cheap S3/ADLS) is completely separated from compute (query engines). We can scale up 100 servers to run a massive query, then scale down to zero to save costs.
+
+**Aquaculture Example:** During the annual harvest season (September-October), we spin up massive compute clusters to run complex yield forecasts across 50 farms. In the slow winter months, we scale compute down to near-zero, saving 90% of cloud costs.
+
+
