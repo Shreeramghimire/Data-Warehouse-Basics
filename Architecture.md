@@ -45,4 +45,39 @@ How we physically build and populate our warehouse defines its architecture. The
 
 **Aquaculture Example:** During the annual harvest season (September-October), we spin up massive compute clusters to run complex yield forecasts across 50 farms. In the slow winter months, we scale compute down to near-zero, saving 90% of cloud costs.
 
+----
 
+## Cubes (Multidimensional OLAP) or DATA CUBES
+
+A data cube is not a physical 3D object; it is a multidimensional array of data that allows us to pre-aggregate measures across multiple business dimensions for lightning-fast queries.
+A cube has:
+
+| Component | Description |
+|-----------|-------------|
+| **Dimensions** | The "categories" we slice by (e.g., Farm Location, Date, Feed Type) |
+| **Measures** | The "numbers" we analyze (e.g., Total Biomass, Average Daily Growth, Total Feed Consumed) |
+
+---
+
+### Aquaculture Example
+
+Imagine a 3D cube (we can add more dimensions, but humans visualize 3):
+
+| Axis | Dimension |
+|------|-----------|
+| **X** | Farm Location (Norway, Chile, Scotland) |
+| **Y** | Date (Year → Quarter → Month → Day) |
+| **Z** | Feed Type (Standard Pellet, High-Omega, Plant-Based) |
+
+**The value inside the cube at the intersection** is **Total Feed Consumed (kg)**.
+
+**Query:** *"Show me total feed consumed in Norway, in Q3 2025, for High-Omega feed."*
+
+- **With Cube:** The cube grabs that single cell instantly — returns in **50 milliseconds**
+- **Without Cube:** The warehouse would have to scan millions of transaction rows, filter, group, and sum — taking **30 seconds**
+
+---
+
+### Modern Reality
+
+Physical cubes (Microsoft Analysis Services, Oracle Essbase) are less common today. Modern warehouses like Snowflake and BigQuery use adaptive query engines that build temporary aggregates on the fly, effectively acting as "virtual cubes."
