@@ -15,4 +15,15 @@ How we physically build and populate our warehouse defines its architecture. The
 **Cons:** Very slow and expensive to build; rigid to change.
 
 ---
+## B. Kimball's Bottom-Up
+
+**Concept:** Build departmental data marts first (e.g., Sales Mart, Inventory Mart) directly from the source systems, using a dimensional model (star schemas). These marts are then joined together logically via a "bus architecture" to create a federated warehouse. Think of it as building separate kitchen stations (grill, pastry, salad) and connecting them with a common ordering system.
+
+**Aquaculture Example:** The Feed Team builds their own Feed_Consumption_Mart directly from feed barge data. The Vet Team builds their Health_Mart directly from veterinary logs. Later, we use a common Date and Farm dimension to join these marts for enterprise reporting.
+
+**Pros:** Fast to implement, business users get value quickly.
+
+**Cons:** Data redundancy (same fish weight stored in 3 different marts), potential inconsistency if dimensions aren't standardized.
+
+---
 
