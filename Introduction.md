@@ -219,3 +219,62 @@ In the Snowflake Schema, we take that flat **CAGE** table and break it into smal
 
 The word "Western Region" is stored exactly once in the entire database. If we rename the region to "West Coast," we update just **1 row** in the REGION table, and it magically fixes every single sensor reading in history.
 
+-----
+## Star vs. Snowflake Schema: A Real Aquaculture Dilemma
+
+Let's look at a real dilemma we will face in aquaculture:
+
+---
+
+### The Problem
+
+Our feed changes constantly. Suppliers tweak protein percentages weekly, and pellet sizes vary by water temperature.
+
+---
+
+### The Star Schema Approach
+
+In a Star Schema:
+
+- Every time the feed changes by 0.5% protein, we have to overwrite thousands of historical rows in our fat FEED table
+- This is a **maintenance nightmare** and we risk data corruption
+
+**The Issue:** Historical data gets overwritten, making it impossible to analyze past performance against old feed formulations accurately.
+
+---
+
+### The Snowflake Schema Approach
+
+In a Snowflake Schema:
+
+- We create a `FEED_FORMULA` table linked to a `FEED_BATCH` table
+- When the protein changes, we simply add a new `FEED_BATCH` key
+- The old historical data stays **perfectly linked** to the old batch
+
+**The Benefit:** We preserve historical accuracy while accommodating change — no overwriting, no corruption.
+
+---
+
+### Visual Comparison
+
+| Aspect | Star Schema | Snowflake Schema |
+|--------|-------------|------------------|
+| **Feed changes** | Overwrite thousands of rows | Add one new batch row |
+| **Historical accuracy** | Lost | Preserved |
+| **Maintenance** | Nightmare | Clean and manageable |
+| **Risk** | Data corruption | None |
+
+---
+
+### The Trade-Off
+
+| Schema | Query Speed | Maintenance Ease | Historical Accuracy |
+|--------|-------------|------------------|---------------------|
+| **Star** | ⚡ Fast (1 join) | 🔴 Painful (overwrites) | 🔴 Lost |
+| **Snowflake** | 🐢 Slower (3+ joins) | 🟢 Easy (append only) | 🟢 Preserved |
+
+---
+
+### Key Takeaway
+
+> The Snowflake schema costs us a few extra joins at query time, but it saves us from a maintenance nightmare and preserves our historical data integrity, a critical requirement for aquaculture traceability and regulatory compliance.
