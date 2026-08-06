@@ -277,4 +277,19 @@ In a Snowflake Schema:
 
 ### Key Takeaway
 
-> The Snowflake schema costs us a few extra joins at query time, but it saves us from a maintenance nightmare and preserves our historical data integrity, a critical requirement for aquaculture traceability and regulatory compliance.
+> The Snowflake schema costs us a few extra joins at query time, and it saves us from a maintenance nightmare and preserves our historical data integrity, a critical requirement for aquaculture traceability and regulatory compliance.
+
+### Choosing Between Star and Snowflake: A Practical Guide
+
+| Scenario | Which Schema? | Why? |
+|----------|---------------|------|
+| **Real-time dashboard for the farm manager watching oxygen levels and feed rates on their iPad** |  **STAR** | They need instant responses to save fish from hypoxia. **Speed is life.** |
+| **Scientific research over 10 years, tracking genetic lineages, complex veterinary treatments, and shifting ocean currents** |  **SNOWFLAKE** | We have deeply nested hierarchies (e.g., Treatment → Vet_Visit → Diagnosis → Pathogen_Strain). We need strict data cleanliness, and we can wait 5 seconds for a complex report. |
+| **Daily operational reports (e.g., "Feed conversion ratio per cage for today")** |  **STAR** | Our farm workers don't know SQL; they just drag and drop in Power BI. Flat tables are far easier for them to understand. |
+
+---
+
+### The Modern Aquaculture Compromise
+
+Most companies use a **Star Schema** for their daily operational dashboards, but keep a separate **Snowflake "Data Vault"** in the background specifically for tracking the complex regulatory compliance data (like veterinary drug withdrawal periods), where every historical change must be meticulously preserved without duplication.
+
