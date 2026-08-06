@@ -132,3 +132,46 @@ Data marts are not sold separately — they are built inside the major platforms
 | Materialize specific aggregated tables | dbt (data build tool) |
 
 osoft Analysis Services, Oracle Essbase) are less common today. Modern warehouses like Snowflake and BigQuery use adaptive query engines that build temporary aggregates on the fly, effectively acting as "virtual cubes."
+
+----
+
+## The Star Schema 
+
+A central **Fact** table (e.g., Sales) surrounded by **Dimension** tables (e.g., Customer, Product, Date).
+
+All the descriptive details about a product (name, brand, category, color) are crammed into a single, flat Product table.
+
+**Visual:** It looks like a literal star.
+
+### In Aquaculture 
+
+In the Star Schema, all the descriptive details are crammed into single, wide dimension tables.
+
+**The CAGE Dimension Table (One single table):**
+
+| Cage_Key | Cage_Number | Farm_Site | Farm_Region | Water_Source | Stocking_Density | Pen_Type | Depth_Meters |
+|----------|-------------|-----------|-------------|--------------|------------------|----------|--------------|
+| 101 | Cage 7 | North Bay | Western Region | Fjord | 18 kg/m³ | Circular Steel | 25 |
+
+**The FEED Dimension Table (One single table):**
+
+| Feed_Key | Feed_Brand | Pellet_Size | Protein_Pct | Fat_Pct | Supplier | Supplier_Country |
+|----------|------------|-------------|-------------|---------|----------|------------------|
+| 500 | SuperGrow | 9mm | 45% | 22% | Skretting | Norway |
+
+---
+
+#### How It Looks
+
+If we have 10,000 sensor readings from Cage 7, the words "North Bay," "Fjord," and "Circular Steel" are physically repeated in the database 10,000 times.
+
+**The Query:** To find mortality in the Western Region, we just run:
+
+```sql
+SELECT SUM(Mortality) 
+FROM FARM_OBSERVATIONS 
+JOIN CAGE ON ... 
+WHERE Farm_Region = 'Western Region';
+```
+---
+
