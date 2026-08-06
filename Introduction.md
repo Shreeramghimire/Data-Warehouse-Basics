@@ -175,7 +175,7 @@ WHERE Farm_Region = 'Western Region';
 ```
 ---
 
-### The Snowflake Schema (The "Normalized" Alternative)
+### The Snowflake Schema 
 
 **What it looks like:** The same central **Fact** table, but the surrounding dimensions are broken down into smaller, connected pieces.
 
