@@ -270,8 +270,8 @@ In a Snowflake Schema:
 
 | Schema | Query Speed | Maintenance Ease | Historical Accuracy |
 |--------|-------------|------------------|---------------------|
-| **Star** | ⚡ Fast (1 join) | 🔴 Painful (overwrites) | 🔴 Lost |
-| **Snowflake** | 🐢 Slower (3+ joins) | 🟢 Easy (append only) | 🟢 Preserved |
+| **Star** |  Fast (1 join) |  Painful (overwrites) |  Lost |
+| **Snowflake** |  Slower (3+ joins) |  Easy (append only) |  Preserved |
 
 ---
 
