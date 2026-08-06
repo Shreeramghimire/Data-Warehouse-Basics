@@ -175,3 +175,48 @@ WHERE Farm_Region = 'Western Region';
 ```
 ---
 
+### The Snowflake Schema (The "Normalized" Alternative)
+
+**What it looks like:** The same central **Fact** table, but the surrounding dimensions are broken down into smaller, connected pieces.
+
+**The catch:** Instead of one flat Product table, we have a Product table that links to a separate Brand table, which links to a separate Manufacturer table.
+
+**Visual:** The edges of the star branch out into multiple levels, looking like a snowflake.
+
+---
+
+#### In Aquaculture (Tidy & Normalized)
+
+In the Snowflake Schema, we take that flat **CAGE** table and break it into smaller, logical pieces to remove repetition.
+
+**The CAGE Dimension Table (Now tiny):**
+
+| Cage_Key | Cage_Number | Farm_Site_Key | Stocking_Density | Pen_Type_Key | Depth_Meters |
+|----------|-------------|---------------|------------------|--------------|--------------|
+| 101 | Cage 7 | 5 | 18 kg/m³ | 12 | 25 |
+
+**The FARM_SITE Table (New lookup):**
+
+| Farm_Site_Key | Farm_Site | Water_Source | Region_Key |
+|---------------|-----------|--------------|------------|
+| 5 | North Bay | Fjord | 200 |
+
+**The REGION Table (New lookup):**
+
+| Region_Key | Farm_Region | Country |
+|------------|-------------|---------|
+| 200 | Western Region | Norway |
+
+**The PEN_TYPE Table (New lookup):**
+
+| Pen_Type_Key | Pen_Type | Manufacturer |
+|--------------|----------|--------------|
+| 12 | Circular Steel | Aqualine AS |
+
+---
+
+#### How It Looks
+
+The word "Western Region" is stored exactly once in the entire database. If we rename the region to "West Coast," we update just **1 row** in the REGION table, and it magically fixes every single sensor reading in history.
+
+**The Query:** To find mortality in the Western Region, we now have to run:
