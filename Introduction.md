@@ -173,19 +173,19 @@ FROM FARM_OBSERVATIONS
 JOIN CAGE ON ... 
 WHERE Farm_Region = 'Western Region';
 ```
----
+----
 
-### The Snowflake Schema 
+## The Snowflake Schema 
 
-**What it looks like:** The same central **Fact** table, but the surrounding dimensions are broken down into smaller, connected pieces.
+The same central **Fact** table, but the surrounding dimensions are broken down into smaller, connected pieces.
 
-**The catch:** Instead of one flat Product table, we have a Product table that links to a separate Brand table, which links to a separate Manufacturer table.
+Instead of one flat Product table, we have a Product table that links to a separate Brand table, which links to a separate Manufacturer table.
 
 **Visual:** The edges of the star branch out into multiple levels, looking like a snowflake.
 
 ---
 
-#### In Aquaculture (Tidy & Normalized)
+### In Aquaculture 
 
 In the Snowflake Schema, we take that flat **CAGE** table and break it into smaller, logical pieces to remove repetition.
 
@@ -215,7 +215,7 @@ In the Snowflake Schema, we take that flat **CAGE** table and break it into smal
 
 ---
 
-#### How It Looks
+### How It Looks
 
 The word "Western Region" is stored exactly once in the entire database. If we rename the region to "West Coast," we update just **1 row** in the REGION table, and it magically fixes every single sensor reading in history.
 
