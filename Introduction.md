@@ -219,4 +219,3 @@ In the Snowflake Schema, we take that flat **CAGE** table and break it into smal
 
 The word "Western Region" is stored exactly once in the entire database. If we rename the region to "West Coast," we update just **1 row** in the REGION table, and it magically fixes every single sensor reading in history.
 
-**The Query:** To find mortality in the Western Region, we now have to run:
