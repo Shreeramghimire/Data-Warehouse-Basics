@@ -1,4 +1,5 @@
 # Data Warehouse Basics in reference to Aquaculture data
+----
 
 This repository presents my understanding and perspectives on **data warehouse architecture, data warehouse design, data integration, data flow, and different schema structures**, with a particular focus on their applications in **aquaculture**.
 
@@ -9,6 +10,8 @@ As aquaculture continues to expand, the volume, diversity, and complexity of dat
 Understanding how these data are **generated, structured, integrated, transferred, stored, and utilized** is therefore essential. Well-designed data warehouse architectures and effective data management strategies can improve decision-making, reduce resource wastage, support automation, and enable more efficient and sustainable aquaculture production.
 
 Through this repository, I aim to present my **thoughts, ideas, and practical approaches to managing aquaculture data**, while exploring how database concepts and modern data architectures can be applied to address real-world challenges in the aquaculture sector.
+
+The repository is intended to bridge the gap between **datawarehouse and data engineering concepts and their practical applications in aquaculture**, demonstrating how a well-structured data ecosystem can support the future of data-driven and sustainable aquaculture.
 
 
 
