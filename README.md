@@ -1,1 +1,6 @@
 # Data Warehouse Basics in reference to Aquaculture data
+
+This repository presents my understanding and perspectives on **data warehouse architecture, data warehouse design, data integration, data flow, and different schema structures**, with a particular focus on their applications in **aquaculture**.
+
+Aquaculture is one of the fastest-growing sectors within global food production and is expected to play an increasingly important role in meeting the nutritional demands of a growing human population. Aquatic food systems have significant potential to contribute to sustainable food production, resource efficiency, and the supply of high-quality animal protein.
+
