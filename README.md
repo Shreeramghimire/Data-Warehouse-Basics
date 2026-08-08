@@ -4,3 +4,7 @@ This repository presents my understanding and perspectives on **data warehouse a
 
 Aquaculture is one of the fastest-growing sectors within global food production and is expected to play an increasingly important role in meeting the nutritional demands of a growing human population. Aquatic food systems have significant potential to contribute to sustainable food production, resource efficiency, and the supply of high-quality animal protein.
 
+As aquaculture continues to expand, the volume, diversity, and complexity of data generated throughout the production process are also increasing. These data can originate from a wide range of sources, including production systems, environmental monitoring, fish health and welfare assessments, feeding operations, genetics, water quality, and farm management activities.
+
+
+
