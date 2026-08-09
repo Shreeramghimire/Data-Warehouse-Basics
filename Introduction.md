@@ -131,7 +131,7 @@ Data marts are not sold separately — they are built inside the major platforms
 | Create a curated Schema | Databricks Unity Catalog |
 | Materialize specific aggregated tables | dbt (data build tool) |
 
-Microsoft Analysis Services, and Oracle Essbase are less common today. Modern warehouses like Snowflake and BigQuery use adaptive query engines that build temporary aggregates on the fly, effectively acting as "virtual cubes."
+Microsoft Analysis Services and Oracle Essbase are less common today. Modern warehouses like Snowflake and BigQuery use adaptive query engines that build temporary aggregates on the fly, effectively acting as "virtual cubes."
 
 ----
 
