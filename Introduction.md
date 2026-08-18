@@ -8,7 +8,7 @@ A data lake stores raw, unprocessed data in its native format. In aquaculture, t
 
 ---
 
-### Processing
+### Processing:
 
 **ELT (Extract, Load, Transform):** We dump it raw, and clean it up only when we decide to use it.
 
