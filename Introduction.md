@@ -39,7 +39,8 @@ Our open-pen salmon farm has hundreds of underwater IoT sensors. Every second, t
 | Azure | Data Lake Storage (ADLS) |
 | Google | Dataplex |
 
----
+----
+
 ## Data Warehouse
 
 ---
