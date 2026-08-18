@@ -89,25 +89,25 @@ The warehouse processes this in seconds, helping the CEO decide whether to inves
 
 ---
 
-### Concept
+### Concept:
 
 A data mart is a small, subject-specific slice of the warehouse, customized for a single department. It contains only the data that the team cares about, making their daily queries lightning-fast and simple.
 
 ---
 
-### Processing
+### Processing:
 
 Built from the central warehouse (or directly from source systems).
 
 ---
 
-### Scope
+### Scope:
 
 Departmental or team-specific (tactical, day-to-day).
 
 ---
 
-### Aquaculture Example
+### Aquaculture Example:
 
 The Harvest & Logistics Team does not care about vaccine history or breeding genetics. They pull a subset from the main warehouse to create their own **Harvest Data Mart**. This mart contains just three tables:
 
