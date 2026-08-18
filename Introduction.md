@@ -31,7 +31,7 @@ Our open-pen salmon farm has hundreds of underwater IoT sensors. Every second, t
 
 ---
 
-### Major Providers
+### Major Providers:
 
 | Provider | Service |
 |----------|---------|
