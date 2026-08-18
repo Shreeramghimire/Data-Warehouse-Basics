@@ -51,7 +51,7 @@ A data warehouse takes that raw ocean data, cleans it, standardizes it, and stru
 
 ---
 
-### Processing
+### Processing:
 
 **ETL (Extract, Transform, Load):** Data is heavily scrubbed, deduplicated, and modeled before it enters.
 
