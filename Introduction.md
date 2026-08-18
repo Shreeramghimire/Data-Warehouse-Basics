@@ -83,7 +83,8 @@ The warehouse processes this in seconds, helping the CEO decide whether to inves
 
  **Snowflake**: Huge in aquaculture for its easy data sharing with third-party weather forecasters, **Amazon Redshift**, **Google BigQuery**, **Microsoft Azure Synapse**
 
----
+----
+
 ## Data Mart
 
 ---
