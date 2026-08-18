@@ -84,7 +84,7 @@ Physical cubes (Microsoft Analysis Services, Oracle Essbase) are less common tod
 
 ---
 
-## Materialized Views (The "Pre-Baked Query")
+## Materialized Views
 
 A materialized view (MV) is a database object that stores the physical result of a query on disk. Unlike a regular "virtual" view (which is just a saved SELECT statement that runs every time we call it), a materialized view is pre-computed and stored like a physical table. It is automatically refreshed (incrementally or fully) when the underlying data changes.
 
