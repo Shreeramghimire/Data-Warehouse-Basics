@@ -14,7 +14,7 @@ A data lake stores raw, unprocessed data in its native format. In aquaculture, t
 
 ---
 
-### Scope
+### Scope:
 
 Enterprise-wide raw repository.
 
