@@ -2,7 +2,7 @@
 
 ---
 
-### Concept
+### Concept:
 
 A data lake stores raw, unprocessed data in its native format. In aquaculture, this is the chaotic firehose of data streaming in 24/7 from the farm. We store everything exactly as it arrives, because we don't know which data points will be valuable for AI models in the future.
 
