@@ -57,13 +57,13 @@ A data warehouse takes that raw ocean data, cleans it, standardizes it, and stru
 
 ---
 
-### Scope
+### Scope:
 
 Enterprise-wide, strategic decision-making.
 
 ---
 
-### Aquaculture Example
+### Aquaculture Example:
 
 Every night, an ETL pipeline pulls data from 50 different salmon farms, transforms it, and loads it into a central warehouse (e.g., Snowflake). It creates tables like:
 
