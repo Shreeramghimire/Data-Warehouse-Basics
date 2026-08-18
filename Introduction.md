@@ -20,7 +20,7 @@ Enterprise-wide raw repository.
 
 ---
 
-### Aquaculture Example
+### Aquaculture Example:
 
 Our open-pen salmon farm has hundreds of underwater IoT sensors. Every second, the lake ingests:
 
