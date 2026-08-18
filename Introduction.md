@@ -45,7 +45,7 @@ Our open-pen salmon farm has hundreds of underwater IoT sensors. Every second, t
 
 ---
 
-### Concept
+### Concept:
 
 A data warehouse takes that raw ocean data, cleans it, standardizes it, and structures it into strict rows and columns (facts and dimensions). It is the **"Single Source of Truth"** for the entire aquaculture corporation. It answers historical, strategic business questions.
 
